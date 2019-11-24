@@ -1,12 +1,12 @@
 #!usr/bin/env python  
 # -*- coding:utf-8 _*-
 # @author:Torres Ye
-# @file: hainan.py 
+# @file: delta.py
 # @version:
 # @time: 2018/12/10 
 # @email:yzlview@163.com
 """
-海南航空价格
+达美航空
 """
 import requests, json, sys, io
 
