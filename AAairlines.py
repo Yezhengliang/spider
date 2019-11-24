@@ -5,6 +5,10 @@
 # @version:
 # @time: 2018/11/18 
 # @email:yzlview@163.com
+
+"""
+美联航航班查询
+"""
 import requests, re
 
 # sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='gb18030')
@@ -14,7 +18,7 @@ headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.1'
                   '02 Safari/537.36',
 }
-res = sess.get(url1, headers=headers)
+res = sess.get(url1, headers=headers,verify=False)
 # print(res.cookies.get('JSESSIONID'))
 data1 = {
     'REFRESH': '0',
@@ -56,9 +60,9 @@ data1 = {
     'E_LOCATION_1': 'PVG',
     'B_LOCATION_2': 'PVG',
     'E_LOCATION_2': 'LAX',
-    'B_DATE_1': '201811180000',
+    'B_DATE_1': '201911180000',
     'B_ANY_TIME_1': True,
-    'B_DATE_2': '201811250000',
+    'B_DATE_2': '201911250000',
     'B_ANY_TIME_2': True,
     'TRIP_TYPE': 'R',
     'COMMERCIAL_FARE_FAMILY_1': 'LOWEST',
@@ -70,7 +74,7 @@ url2 = 'https://bookaa.amadeus.com/plnext/AADX/Override.action'
 headers['Accept-Encoding'] = 'gzip, deflate, br'
 headers['Accept-Language'] = 'zh-CN,zh;q=0.9'
 
-res2 = sess.post(url2, data=data1, headers=headers)
+res2 = sess.post(url2, data=data1, headers=headers,verify=False)
 # print(res2.text)
 sessid = re.findall('sessionId = "(.*?)";', res2.text, re.S)
 # print(sessid)
@@ -93,8 +97,8 @@ data2 = {
     'FP_ERT_ACTIVATED': False,
     'SO_SITE_POINT_OF_SALE': 'BJS',
     'DATE_RANGE_QUALIFIER_2': 'C',
-    'B_DATE_1': '201811180000',
-    'B_DATE_2': '201811250000',
+    'B_DATE_1': '201911180000',
+    'B_DATE_2': '201911250000',
     'B_ANY_TIME_1': True,
     'SO_SITE_MINIMAL_TIME': 'H4',
     'SO_SITE_PREFERRED_CARRIER': 'AAYY',
@@ -129,5 +133,5 @@ data2 = {
     'DATA_TYPE': 'json',
     'EMBEDDED_TRANSACTION': 'FlexPricerAvailability',
 }
-res3 = sess.post(url3, data=data2, headers=headers)
+res3 = sess.post(url3, data=data2, headers=headers,verify=False)
 print(res3.text)
